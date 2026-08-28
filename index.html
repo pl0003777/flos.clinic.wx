@@ -391,66 +391,6 @@
 .sub-name {
   display: block;
 }
-/* -------- 手機版選單（880px 以下）總合修正版 -------- */
-@media (max-width: 880px) {
-  /* 1. 預設先隱藏選單 */
-  nav.links {
-    display: none; 
-  }
-
-  /* 2. 點擊漢堡選單展開後的整體外觀（往下展開、撐滿螢幕、漂亮的背景與陰影） */
-  nav.links.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: rgba(246, 243, 236, 0.98);
-    backdrop-filter: blur(10px);
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-    gap: 16px;
-    z-index: 999;
-  }
-
-  /* 3. 療程項目大選單容器：改為上下垂直排列，避免左右擠壓 */
-  nav.links.active .mega-menu-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 15px !important;
-  }
-
-  /* 4. 左側大項目（肌膚管理、勻體方案等）變為滿版橫列或清單 */
-  nav.links.active .mega-sidebar {
-    width: 100% !important;
-    border-right: none !important;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    padding-bottom: 15px !important;
-    padding-right: 0 !important;
-  }
-
-  /* 5. 右側細項內容區塊佔滿螢幕寬度 */
-  nav.links.active .mega-content {
-    width: 100% !important;
-  }
-
-  /* 6. 確保手機版點開後，mega-menu 本身正常顯示 */
-  nav.links.active .mega-menu {
-    display: block !important;
-    position: static !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    padding: 0 !important;
-  }
-
-  /* 7. 手機上取消滑鼠 hover，改由點擊觸發 */
-  .nav-item.dropdown-mega:hover .mega-menu {
-    display: none;
-  }
-}
-    
 </style>
 </head>
 <body>
@@ -910,40 +850,35 @@
 </footer>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('nav.links');
-    
-    // 1. 點擊漢堡按鈕展開/收合手機版選單
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-      });
-    }
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 
-    // 2. 手機版點擊左側大項目時，切換右側對應的細項內容
-    const categoryItems = document.querySelectorAll('.category-item');
+<!-- ⬇️ 把下拉選單的 JS 貼在這裡 ⬇️ -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const categoryItems = document.querySelectorAll(".category-item");
+    const subPanes = document.querySelectorAll(".sub-category-pane");
+
     categoryItems.forEach(item => {
-      item.addEventListener('click', function(e) {
-        // 如果是手機版，阻止預設跳轉並切換 active
-        if (window.innerWidth <= 880) {
-          e.preventDefault();
-        }
-        
-        // 移除其他大項目的 active
-        categoryItems.forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
+      item.addEventListener("mouseenter", function() {
+        categoryItems.forEach(i => i.classList.remove("active"));
+        this.classList.add("active");
 
-        // 顯示對應的右側細項 pane
-        const targetId = 'pane-' + this.getAttribute('data-target');
-        document.querySelectorAll('.sub-category-pane').forEach(pane => {
-          pane.classList.remove('active');
+        const targetID = this.getAttribute("data-target");
+
+        subPanes.forEach(pane => {
+          pane.classList.remove("active");
+          if(pane.id === "pane-" + targetID) {
+            pane.classList.add("active");
+          }
         });
-        const targetPane = document.getElementById(targetId);
-        if (targetPane) {
-          targetPane.classList.add('active');
-        }
       });
     });
   });
