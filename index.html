@@ -270,6 +270,28 @@
     font-size: 12px;
     letter-spacing: 0.08em;
   }
+/* -------- team slider (仿造分館滑動效果) -------- */
+.team-slider {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  scrollbar-width: thin;
+}
+.team-slider .team-card {
+  min-width: 100%;
+  scroll-snap-align: start;
+  background: var(--paper-deep);
+  border-radius: 4px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+@media (min-width: 880px) {
+  .team-slider .team-card {
+    min-width: calc(33.333% - 21.33px); /* 讓電腦版剛好一行顯示三個並可滑動 */
+  }
+}
 </style>
 </head>
 <body>
@@ -384,58 +406,72 @@
           <div class="kicker"><span class="num">03</span>MEDICAL TEAM</div>
           <h2 class="title">醫療團隊</h2>
         </div>
-        <p class="section-note">由具備皮膚、整形專科背景的醫師群，共同規劃每一份療程方案。</p>
+        <p class="section-note">由專業的醫師群，共同規劃每一份療程方案。（左右滑動可查看更多醫師）</p>
       </div>
-      <div class="team-grid reveal">
+      
+      <!-- 左右滑動的外層容器 -->
+      <div class="team-slider reveal">
+        
+        <!-- 醫師一：鍾曜任醫師 -->
         <div class="team-card">
           <div class="photo-block"></div>
-          <div class="team-name">周○○ 醫師</div>
-          <div class="team-role">院長・輪廓美學</div>
-          <p class="team-desc">專長電波、音波與微整輪廓設計，重視五官比例的自然協調。</p>
+          <div style="margin-top: 16px;">
+            <div class="team-name">鍾曜任醫師</div>
+            <div class="team-role">復興店・文心店</div>
+            <p class="team-desc">跨店駐診，專精全方位微整雕塑與現代皮膚醫學治療。</p>
+          </div>
         </div>
-        <div class="team-card">
-          <div class="photo-block"></div>
-          <div class="team-name">周○○ 醫師</div>
-          <div class="team-role">主治醫師・膚質管理</div>
-          <p class="team-desc">深耕雷射與皮秒治療，擅長痘疤與色素相關膚況調理。</p>
-        </div>
-        <div class="team-card">
-          <div class="photo-block"></div>
-          <div class="team-name">周○○ 醫師</div>
-          <div class="team-role">主治醫師・體態雕塑</div>
-          <p class="team-desc">專精體雕與增肌減脂療程設計，依生活型態擬定計畫。</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="journal">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker"><span class="num">04</span>JOURNAL</div>
-          <h2 class="title">專業文章</h2>
+        <!-- 醫師二：王晨宇醫師 -->
+        <div class="team-card">
+          <div class="photo-block"></div>
+          <div style="margin-top: 16px;">
+            <div class="team-name">王晨宇醫師</div>
+            <div class="team-role">文心店</div>
+            <p class="team-desc">專長美學微整與專業皮膚科診療，提供細緻的個人化療程規劃。</p>
+          </div>
         </div>
-        <p class="section-note">關於保養、療程與皮膚科學的長期紀錄。</p>
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="journal-grid reveal">
-        <div class="journal-card">
-          <div class="journal-cat">膠原蛋白</div>
-          <div class="journal-title">麗珠蘭是什麼？一篇了解喚醒膠原蛋白的作用機轉</div>
-          <div class="journal-date">閱讀文章 →</div>
+
+        <!-- 醫師三：張涵清醫師 -->
+        <div class="team-card">
+          <div class="photo-block"></div>
+          <div style="margin-top: 16px;">
+            <div class="team-name">張涵清醫師</div>
+            <div class="team-role">文心店</div>
+            <p class="team-desc">擅長光療與肌膚抗衰老管理，重視自然協調的整體美感。</p>
+          </div>
         </div>
-        <div class="journal-card">
-          <div class="journal-cat">輪廓保養</div>
-          <div class="journal-title">電波與音波怎麼選？依鬆弛程度規劃合適療程</div>
-          <div class="journal-date">閱讀文章 →</div>
+
+        <!-- 醫師四：張晉慈醫師 -->
+        <div class="team-card">
+          <div class="photo-block"></div>
+          <div style="margin-top: 16px;">
+            <div class="team-name">張晉慈醫師</div>
+            <div class="team-role">文心店</div>
+            <p class="team-desc">專精問題肌膚調理與現代皮膚科學，守護健康的肌膚屏障。</p>
+          </div>
         </div>
-        <div class="journal-card">
-          <div class="journal-cat">膚質改善</div>
-          <div class="journal-title">痘疤修復的三個階段，你現在適合哪一種？</div>
-          <div class="journal-date">閱讀文章 →</div>
+
+        <!-- 醫師五：鍾念庭醫師 -->
+        <div class="team-card">
+          <div class="photo-block"></div>
+          <div style="margin-top: 16px;">
+            <div class="team-name">鍾念庭醫師</div>
+            <div class="team-role">文心店</div>
+            <p class="team-desc">致力於提供專業、精準的皮膚科醫療與醫學美容服務。</p>
+          </div>
         </div>
+
+        <!-- 醫師六：林志宇醫師 -->
+        <div class="team-card">
+          <div class="photo-block"></div>
+          <div style="margin-top: 16px;">
+            <div class="team-name">林志宇醫師</div>
+            <div class="team-role">文心店</div>
+            <p class="team-desc">結合專業皮膚專科背景，為每位顧客打造最合適的調理方案。</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
