@@ -430,6 +430,33 @@
     gap: 16px;                /* 項目與項目之間的間距 */
   }
 }
+
+@media (max-width: 880px) {
+  /* 讓手機版的選單容器變成上下排列：左側選單在上，右側內容在下 */
+  .mega-menu-container {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  
+  /* 手機版讓左側大項目完整顯示並可以橫向滑動或清楚列出 */
+  .mega-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-right: 0 !important;
+    padding-bottom: 15px;
+  }
+
+  /* 手機版右側細項區塊寬度佔滿 */
+  .mega-content {
+    width: 100% !important;
+  }
+
+  /* 讓電腦版的 hover 在手機上改成靠點擊觸發 */
+  .nav-item.dropdown-mega:hover .mega-menu {
+    display: none; /* 手機上取消滑鼠移過去就直接開大選單的設定，改由漢堡選單控制 */
+  }
+}
     
 </style>
 </head>
@@ -911,50 +938,45 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 
-    // 2. 電腦版：療程項目滑鼠移過去切換細項
+    // 2. 療程項目切換（同時支援電腦版滑鼠移過去 & 手機版點擊）
     const categoryItems = document.querySelectorAll(".category-item");
     const subPanes = document.querySelectorAll(".sub-category-pane");
 
     categoryItems.forEach(item => {
+      // 支援滑鼠移過去 (電腦版)
       item.addEventListener("mouseenter", function() {
-        categoryItems.forEach(i => i.classList.remove("active"));
-        this.classList.add("active");
-
-        const targetID = this.getAttribute("data-target");
-
-        subPanes.forEach(pane => {
-          pane.classList.remove("active");
-          if(pane.id === "pane-" + targetID) {
-            pane.classList.add("active");
-          }
-        });
+        switchCategory(this);
+      });
+      // 支援點擊 (手機版)
+      item.addEventListener("click", function(e) {
+        e.preventDefault();
+        switchCategory(this);
       });
     });
 
+    function switchCategory(currentItem) {
+      categoryItems.forEach(i => i.classList.remove("active"));
+      currentItem.classList.add("active");
 
-    // 3. 手機版：漢堡選單（三條槓）點擊開關
-    const menuToggle = document.querySelector('.menu-toggle, .hamburger, #menuBtn, [class*="hamburger"], [class*="menu-btn"]');
-    const navLinks = document.querySelector('.nav-links, .mobile-menu, #mobileNav, nav ul, [class*="nav-list"]');
+      const targetID = currentItem.getAttribute("data-target");
 
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
+      subPanes.forEach(pane => {
+        pane.classList.remove("active");
+        if(pane.id === "pane-" + targetID) {
+          pane.classList.add("active");
+        }
       });
     }
-  });
-</script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
+
+    // 3. 手機版：漢堡選單（三條槓）點擊開關與圖示切換
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav.links');
 
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', function() {
+      menuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
         navLinks.classList.toggle('active');
-        // 切換漢堡圖示 (☰ 變成 ✕，可有可無)
         menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
       });
     }
