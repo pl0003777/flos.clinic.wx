@@ -6,6 +6,12 @@
 <title>Flos 曜診所｜靜謐美學・台中南屯區</title>
 <link rel="icon" href="favicon.png" type="image/png">
 <style>
+@font-face {
+    font-family: SweiSpringCJKtc-Regular;
+    src: url(https://cdn.jsdelivr.net/gh/max32002/swei-spring@1.068/WebFont/CJK%20TC/SweiSpringCJKtc-Regular.woff2) format("woff2")
+    , url(https://cdn.jsdelivr.net/gh/max32002/swei-spring@1.068/WebFont/CJK%20TC/SweiSpringCJKtc-Regular.woff) format("woff");
+  }
+  
   :root{
     --ink:#132728;
     --ink-soft:#445150;
@@ -15,7 +21,8 @@
     --gold:#445150;
     --gold-deep:#2B3C3C;
     --white:#FBFDFD;
-    --serif: "Noto Serif TC", "Songti TC", serif;
+    /* 將「獅尾四季春加糖」設為標題的第一優先字體 */
+    --serif: "SweiSpringCJKtc-Regular", "Noto Serif TC", "Songti TC", serif;
     --sans: "Noto Sans TC", "PingFang TC", sans-serif;
     --maxw: 1180px;
   }
