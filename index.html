@@ -457,6 +457,23 @@
     display: none; /* 手機上取消滑鼠移過去就直接開大選單的設定，改由漢堡選單控制 */
   }
 }
+
+@media (max-width: 880px) {
+  /* 當手機版導覽列展開時，讓裡面的大選單結構變為垂直顯示 */
+  nav.links.active .mega-menu-container {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* 確保點擊漢堡選單後，mega-menu 本身是顯示的 */
+  nav.links.active .mega-menu {
+    display: block !important;
+    position: static !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+}
     
 </style>
 </head>
