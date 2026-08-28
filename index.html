@@ -221,6 +221,25 @@
   .foot-col a, .foot-col p{ display:block; margin-bottom:9px; }
   .foot-bottom{ display:flex; justify-content:space-between; padding-top:26px; flex-wrap:wrap; gap:12px; }
   .socials{ display:flex; gap:16px; }
+/* -------- branches slider -------- */
+  .branch-slider {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+  }
+  .branch-card {
+    min-width: 100%;
+    scroll-snap-align: start;
+    background: var(--paper-deep);
+    border-radius: 4px;
+    padding: 10px;
+  }
+  @media (min-width: 880px) {
+    .branch-card { min-width: calc(50% - 16px); }
+  }
 </style>
 </head>
 <body>
@@ -402,27 +421,62 @@
     </div>
   </section>
 
-  <section id="location">
+<section id="location">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
           <div class="kicker"><span class="num">05</span>LOCATION</div>
           <h2 class="title">分館資訊</h2>
         </div>
+        <p class="section-note">左右滑動可查看不同分館資訊。</p>
       </div>
-      <div class="space-grid reveal">
-        <div class="photo-block"></div>
-        <div class="space-copy">
-          <p style="margin-top:0;"><b style="font-family:var(--serif); font-size:20px; color:var(--ink); display:block; margin-bottom:14px;">　曜診所｜文心館　</b>
-          <b>地址：</b>台中市南屯區文心南三路332號（近豐樂公園捷運站）<br>
-          <b>電話：</b>04-2473-8803<br>
-          全預約制，請於官方 LINE 完成預約後前往。</p>
-          <div class="stat-row" style="margin-top:32px;">
-            <div><b>週二至週五　　</b><span>12:00 – 20:00</span></div>
-            <div><b>週六　　　　　</b><span>11:00 – 19:00</span></div>
-            <div><b>週一、週日公休</b><span>國定假日另行公告</span></div>
+      
+      <!-- 左右滑動的外層容器 -->
+      <div class="branch-slider reveal">
+        
+        <!-- 分館一：台中館 -->
+        <div class="branch-card">
+          <div class="space-grid" style="grid-template-columns: 1fr; gap: 20px;">
+            <div class="space-copy" style="padding: 20px;">
+              <p style="margin-top:0;"><b style="font-family:var(--serif); font-size:22px; color:var(--ink); display:block; margin-bottom:14px;">曜診所・台中館</b>
+              <b>地址：</b>台中市南屯區文心南三路332號（近豐樂公園捷運站）<br>
+              <b>電話：</b>04-2473-8803<br>
+              全預約制，請於官方 LINE 完成預約後前往。</p>
+              
+              <div class="stat-row" style="margin-top:24px; gap:24px; flex-wrap:wrap;">
+                <div><b>週二至週五</b><span>12:00 – 20:00</span></div>
+                <div><b>週六</b><span>11:00 – 19:00</span></div>
+                <div><b>週一、週日公休</b><span>國定假日另行公告</span></div>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- 分館二：台北復興館 -->
+        <div class="branch-card">
+          <div class="space-grid" style="grid-template-columns: 1fr; gap: 20px;">
+            <div class="space-copy" style="padding: 20px;">
+              <p style="margin-top:0;"><b style="font-family:var(--serif); font-size:22px; color:var(--ink); display:block; margin-bottom:14px;">曜診所・台北復興館</b>
+              <b>地址：</b>台北市大安區大安路一段73號（5樓）<br>
+              <b>電話：</b>02-2721-1201<br>
+              
+              <!-- 台北館專屬連結按鈕 -->
+              <span style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;">
+                <a href="https://www.flosclinic.org/location" target="_blank" class="cta-btn" style="padding:6px 14px; font-size:12px;">官方網站</a>
+                <a href="https://lin.ee/YrMRxyb" target="_blank" class="cta-btn solid" style="padding:6px 14px; font-size:12px;">加入 LINE</a>
+                <a href="https://www.facebook.com/profile.php?id=61576845332290" target="_blank" class="cta-btn" style="padding:6px 14px; font-size:12px;">Facebook</a>
+                <a href="https://www.instagram.com/flos.clinic?igsh=MWR6NGdta2w0amx1OA%3D%3D" target="_blank" class="cta-btn" style="padding:6px 14px; font-size:12px;">Instagram</a>
+              </span>
+              </p>
+
+              <div class="stat-row" style="margin-top:24px; gap:24px; flex-wrap:wrap;">
+                <div><b>週一至週五</b><span>12:00 – 20:30</span></div>
+                <div><b>週六至週日</b><span>11:00 – 19:00</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
