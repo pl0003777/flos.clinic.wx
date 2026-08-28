@@ -910,69 +910,42 @@
 </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // 1. 網頁滾動與動畫特效 JS
-    const header = document.getElementById('siteHeader');
-    if (header) {
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 20);
-      });
-    }
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { 
-        if(e.isIntersecting){ 
-          e.target.classList.add('in'); 
-          io.unobserve(e.target); 
-        } 
-      });
-    }, { threshold: 0.15 });
-    
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-
-    // 2. 療程項目切換（同時支援電腦版滑鼠移過去 & 手機版點擊）
-    const categoryItems = document.querySelectorAll(".category-item");
-    const subPanes = document.querySelectorAll(".sub-category-pane");
-
-    categoryItems.forEach(item => {
-      // 支援滑鼠移過去 (電腦版)
-      item.addEventListener("mouseenter", function() {
-        switchCategory(this);
-      });
-      // 支援點擊 (手機版)
-      item.addEventListener("click", function(e) {
-        e.preventDefault();
-        switchCategory(this);
-      });
-    });
-
-    function switchCategory(currentItem) {
-      categoryItems.forEach(i => i.classList.remove("active"));
-      currentItem.classList.add("active");
-
-      const targetID = currentItem.getAttribute("data-target");
-
-      subPanes.forEach(pane => {
-        pane.classList.remove("active");
-        if(pane.id === "pane-" + targetID) {
-          pane.classList.add("active");
-        }
-      });
-    }
-
-
-    // 3. 手機版：漢堡選單（三條槓）點擊開關與圖示切換
+  document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav.links');
-
+    
+    // 1. 點擊漢堡按鈕展開/收合手機版選單
     if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', function(e) {
-        e.preventDefault();
+      menuToggle.addEventListener('click', function() {
         navLinks.classList.toggle('active');
         menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
       });
     }
+
+    // 2. 手機版點擊左側大項目時，切換右側對應的細項內容
+    const categoryItems = document.querySelectorAll('.category-item');
+    categoryItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        // 如果是手機版，阻止預設跳轉並切換 active
+        if (window.innerWidth <= 880) {
+          e.preventDefault();
+        }
+        
+        // 移除其他大項目的 active
+        categoryItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+
+        // 顯示對應的右側細項 pane
+        const targetId = 'pane-' + this.getAttribute('data-target');
+        document.querySelectorAll('.sub-category-pane').forEach(pane => {
+          pane.classList.remove('active');
+        });
+        const targetPane = document.getElementById(targetId);
+        if (targetPane) {
+          targetPane.classList.add('active');
+        }
+      });
+    });
   });
 </script>
     
