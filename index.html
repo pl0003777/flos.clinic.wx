@@ -407,6 +407,30 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   }
 }
+
+@media (max-width: 880px) {
+  /* 1. 預設先隱藏選單 */
+  nav.links {
+    display: none; 
+  }
+
+  /* 2. 點擊展開後的樣式：改為「往下展開」並佔滿寬度或置中 */
+  nav.links.active {
+    display: flex;
+    flex-direction: column;   /* 讓選單項目「由上往下」排列 */
+    align-items: flex-start;  /* 文字靠左對齊（若想置中可改 center） */
+    position: absolute;
+    top: 100%;                /* 剛好貼在導覽列下方 */
+    left: 0;
+    width: 100%;              /* 寬度撐滿整個螢幕 */
+    background: #ffffff;      /* 背景色（可依你的頁面風格調整） */
+    padding: 20px 24px;       /* 內距 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* 加上一點陰影增加層次 */
+    box-sizing: border-box;   /* 避免 padding 把寬度撐破 */
+    gap: 16px;                /* 項目與項目之間的間距 */
+  }
+}
+    
 </style>
 </head>
 <body>
