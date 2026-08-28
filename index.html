@@ -850,19 +850,28 @@
 </footer>
 
 <script>
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
-  });
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
-
-<!-- ⬇️ 把下拉選單的 JS 貼在這裡 ⬇️ -->
-<script>
   document.addEventListener("DOMContentLoaded", function() {
+    // 1. 網頁滾動與動畫特效 JS
+    const header = document.getElementById('siteHeader');
+    if (header) {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      });
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { 
+        if(e.isIntersecting){ 
+          e.target.classList.add('in'); 
+          io.unobserve(e.target); 
+        } 
+      });
+    }, { threshold: 0.15 });
+    
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+
+    // 2. 電腦版：療程項目滑鼠移過去切換細項
     const categoryItems = document.querySelectorAll(".category-item");
     const subPanes = document.querySelectorAll(".sub-category-pane");
 
@@ -881,6 +890,19 @@
         });
       });
     });
+
+
+    // 3. 手機版：漢堡選單（三條槓）點擊開關
+    const menuToggle = document.querySelector('.menu-toggle, .hamburger, #menuBtn, [class*="hamburger"], [class*="menu-btn"]');
+    const navLinks = document.querySelector('.nav-links, .mobile-menu, #mobileNav, nav ul, [class*="nav-list"]');
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+    }
   });
 </script>
     
