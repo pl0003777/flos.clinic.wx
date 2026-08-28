@@ -921,6 +921,21 @@
     }
   });
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('nav.links');
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        // 切換漢堡圖示 (☰ 變成 ✕，可有可無)
+        menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+      });
+    }
+  });
+</script>
     
 </body>
 </html>
