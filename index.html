@@ -292,6 +292,11 @@
     min-width: calc(33.333% - 21.33px); /* 讓電腦版剛好一行顯示三個並可滑動 */
   }
 }
+    .team-card {
+  max-height: 520px;
+  overflow-y: auto; /* 內容太多時卡片內部可以上下滾動 */
+  scrollbar-width: thin;
+}
 </style>
 </head>
 <body>
@@ -399,7 +404,7 @@
     </div>
   </section>
 
-  <section id="team">
+<section id="team">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
@@ -418,7 +423,18 @@
           <div style="margin-top: 16px;">
             <div class="team-name">鍾曜任醫師</div>
             <div class="team-role">復興店・文心店</div>
-            <p class="team-desc">跨店駐診，專精全方位微整雕塑與現代皮膚醫學治療。</p>
+            <div class="team-detail-block" style="margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+              <p><strong>【學經歷】</strong><br>
+              國立陽明交通大學醫學系畢<br>
+              台北榮民總醫院訓練／台北市聯合醫院不分科住院醫師<br>
+              台北市立聯合醫院松德院區訓練<br>
+              亞東醫院家庭醫學科住院醫師、總醫師<br>
+              台灣家庭醫學醫學會專科醫師<br>
+              台灣臨床TMS腦刺激學會會員<br>
+              台灣肥胖醫學會會員／台灣運動營養學會會員</p>
+              <p style="margin-top: 8px;"><strong>【專長】</strong><br>
+              得美微針筆處理痘疤、落髮等問題、減重＆體態控制、全身雕塑、電波及音波拉提、半永久雷射除毛、膚況改善雷射、肉毒桿菌</p>
+            </div>
           </div>
         </div>
 
@@ -428,7 +444,15 @@
           <div style="margin-top: 16px;">
             <div class="team-name">王晨宇醫師</div>
             <div class="team-role">文心店</div>
-            <p class="team-desc">專長美學微整與專業皮膚科診療，提供細緻的個人化療程規劃。</p>
+            <div class="team-detail-block" style="margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+              <p><strong>【學經歷】</strong><br>
+              長庚大學醫學系畢業｜中華民國衛福部定專科醫師執照<br>
+              林口長庚醫院、童綜合醫院高級健檢中心主治醫師<br>
+              安妞美學診所／星和診所主治醫師<br>
+              糖尿病共通照護網／職業醫學勞工體格與健康檢查合格認證專科醫師</p>
+              <p style="margin-top: 8px;"><strong>【專長】</strong><br>
+              精準肉毒注射與輪廓調整、電波與音波緊緻拉提、客製化水光注射與肌膚養護、雷射光療與膚色管理、臉頸輪廓與非侵入式體態雕塑（Onda Pro、冷凍減脂等）、全身各部位除毛</p>
+            </div>
           </div>
         </div>
 
@@ -438,7 +462,14 @@
           <div style="margin-top: 16px;">
             <div class="team-name">張涵清醫師</div>
             <div class="team-role">文心店</div>
-            <p class="team-desc">擅長光療與肌膚抗衰老管理，重視自然協調的整體美感。</p>
+            <div class="team-detail-block" style="margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+              <p><strong>【學經歷】</strong><br>
+              中國醫藥大學醫學系畢業<br>
+              台中榮民總醫院 家醫部住院醫師<br>
+              微整形美容醫學會會員</p>
+              <p style="margin-top: 8px;"><strong>【專長】</strong><br>
+              Botox保妥適、Nabota、V50玻尿酸、Ellanse、PLT、MINT神力拉提、鳳凰電波、海芙音波等原廠認證與研習醫師</p>
+            </div>
           </div>
         </div>
 
@@ -448,7 +479,13 @@
           <div style="margin-top: 16px;">
             <div class="team-name">張晉慈醫師</div>
             <div class="team-role">文心店</div>
-            <p class="team-desc">專精問題肌膚調理與現代皮膚科學，守護健康的肌膚屏障。</p>
+            <div class="team-detail-block" style="margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+              <p><strong>【學經歷】</strong><br>
+              中山醫學大學醫學系畢｜台中榮總一般科住院醫師<br>
+              台灣微整形美容醫學會會員｜中華民國美容醫學醫學會會員</p>
+              <p style="margin-top: 8px;"><strong>【專長】</strong><br>
+              電音波緊緻拉提、肉毒桿菌注射、全臉評估精雕、精緻鼻雕、臉部埋線拉提，以及海芙音波、蝴蝶電波、玩美電波、舒顏萃、逆時針等多項原廠認證醫師及雙美膠原蛋白國際培訓講師</p>
+            </div>
           </div>
         </div>
 
@@ -458,7 +495,15 @@
           <div style="margin-top: 16px;">
             <div class="team-name">鍾念庭醫師</div>
             <div class="team-role">文心店</div>
-            <p class="team-desc">致力於提供專業、精準的皮膚科醫療與醫學美容服務。</p>
+            <div class="team-detail-block" style="margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+              <p><strong>【學經歷】</strong><br>
+              中山醫學大學醫學系畢業｜臺中榮總家醫部主治醫師、總醫師、住院醫師<br>
+              臺中榮總減重中心／健康管理中心主治醫師<br>
+              微整形美容醫學會會員</p>
+              <p style="margin-top: 8px;"><strong>【專長】</strong><br>
+              家庭醫學科專科醫師、中華民國肥胖研究學會專科醫師<br>
+              肥胖症與體重管理、慢性病管理、健康管理與諮詢、骨質疏鬆、旅遊醫學與戒菸治療</p>
+            </div>
           </div>
         </div>
 
@@ -468,21 +513,15 @@
           <div style="margin-top: 16px;">
             <div class="team-name">林志宇醫師</div>
             <div class="team-role">文心店</div>
-            <p class="team-desc">結合專業皮膚專科背景，為每位顧客打造最合適的調理方案。</p>
+            <div class="team-detail-block" style="margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+              <p><strong>【學經歷】</strong><br>
+              中山醫學大學醫學士</p>
+              <p style="margin-top: 8px;"><strong>【專長】</strong><br>
+              NeoFilera妮芙蕾、Meteora美特拉線雕、提奧希玻尿酸、AestheFill艾麗斯、MINT Lift秘特拉提線、Cleviel V50、逆時針原廠認證醫師</p>
+            </div>
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <section id="book" class="cta-band">
-    <div class="wrap">
-      <h2 class="reveal">預約一場與自己的對話</h2>
-      <p class="reveal">全預約制，療程規劃前由醫師親自諮詢膚況與需求。</p>
-      <div class="hero-actions reveal">
-        <a href="https://lin.ee/Sfhzb65" target="_blank" class="cta-btn solid">加 LINE 預約</a>
-        <a href="#location" class="cta-btn">查看分館地址</a>
       </div>
     </div>
   </section>
