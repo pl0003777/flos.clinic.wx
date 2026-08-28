@@ -297,6 +297,100 @@
   overflow-y: auto; /* 內容太多時卡片內部可以上下滾動 */
   scrollbar-width: thin;
 }
+    /* 導覽列下拉選單整體外觀 */
+.nav-item.dropdown-mega {
+  position: relative;
+}
+
+.mega-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f5f0e6; /* 配合圖片的米色質感背景 */
+  width: 750px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  padding: 35px 30px;
+  border-radius: 4px;
+  z-index: 999;
+}
+
+/* 滑鼠移到導覽列時顯示 */
+.nav-item.dropdown-mega:hover .mega-menu {
+  display: block;
+}
+
+.mega-menu-container {
+  display: flex;
+  gap: 40px;
+}
+
+/* 左側大項目區塊 */
+.mega-sidebar {
+  width: 45%;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  padding-right: 20px;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-item {
+  font-size: 17px;
+  color: #111;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* 當滑鼠移到左側項目時：變成黑底白字 */
+.category-item.active,
+.category-item:hover {
+  background-color: #112220; /* 診所的主題深色 */
+  color: #fff;
+}
+
+/* 右側細項內容區塊 */
+.mega-content {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sub-category-pane {
+  display: none; /* 預設隱藏所有細項，透過 JS 或預設顯示 */
+}
+
+.sub-category-pane.active {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 細項連結樣式 */
+.sub-item {
+  font-size: 16px;
+  color: #111;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.sub-item:hover {
+  color: #c5a059; /* 點綴金或亮色 */
+}
+
+.sub-name {
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -305,7 +399,122 @@
   <div class="wrap nav">
     <a href="#top" class="wordmark">FLOS <small>曜 診 所</small></a>
     <nav class="links">
-      <a href="#treatments">療程項目＋</a>
+<!-- 導覽列：療程項目下拉選單 -->
+<div class="nav-item dropdown-mega">
+  <a href="#treatments" class="nav-link">療程項目 ▾</a>
+  
+  <!-- 下拉大型選單容器 -->
+  <div class="mega-menu">
+    <div class="mega-menu-container">
+      
+      <!-- 左側：大項目列表 -->
+      <div class="mega-sidebar">
+        <ul class="category-list">
+          <li class="category-item active" data-target="skin">肌膚管理 ➔</li>
+          <li class="category-item" data-target="body">勻體方案 ➔</li>
+          <li class="category-item" data-target="youth">青春激戰 ➔</li>
+          <li class="category-item" data-target="energy">電波、音波 ➔</li>
+          <li class="category-item" data-target="laser">皮膚雷射 ➔</li>
+          <li class="category-item" data-target="botox">肉毒 ➔</li>
+          <li class="category-item" data-target="colloids">膠原蛋白增生劑 ➔</li>
+          <li class="category-item" data-target="ha">玻尿酸 ➔</li>
+          <li class="category-item" data-target="advanced">水光、黑眼圈、消脂 ➔</li>
+        </ul>
+      </div>
+
+      <!-- 右側：細項內容區塊（預留資訊擴充位置） -->
+      <div class="mega-content">
+        
+        <!-- 1. 肌膚管理 -->
+        <div class="sub-category-pane active" id="pane-skin">
+          <a href="#dermapen" class="sub-item">
+            <span class="sub-name">Dermapen得美微針筆</span>
+            <span class="sub-desc-placeholder" style="display:none;">（預留：這裡可填寫介紹或價格）</span>
+          </a>
+          <a href="#syndeo" class="sub-item">
+            <span class="sub-name">Syndeo海菲秀</span>
+          </a>
+          <a href="#emfusion" class="sub-item">
+            <span class="sub-name">Emfusion</span>
+          </a>
+          <a href="#jetpeel" class="sub-item">
+            <span class="sub-name">JetPeel潔比爾</span>
+          </a>
+          <a href="#seyo" class="sub-item">
+            <span class="sub-name">SEYO水光儀</span>
+          </a>
+          <a href="#smartlux" class="sub-item">
+            <span class="sub-name">SMARTLUX照光機</span>
+          </a>
+          <a href="#curejet" class="sub-item">
+            <span class="sub-name">CUREJET酷捷</span>
+          </a>
+        </div>
+
+        <!-- 2. 勻體方案 -->
+        <div class="sub-category-pane" id="pane-body">
+          <a href="#inmode" class="sub-item"><span class="sub-name">InMode LIFT鑽石超塑</span></a>
+          <a href="#embody" class="sub-item"><span class="sub-name">EMBODY核心美力</span></a>
+          <a href="#emsculpt" class="sub-item"><span class="sub-name">Emsculpt NEO 熱磁減脂</span></a>
+          <a href="#indiba" class="sub-item"><span class="sub-name">INDIBA英特波</span></a>
+          <a href="#onda" class="sub-item"><span class="sub-name">Onda PRO超微波</span></a>
+          <a href="#winback" class="sub-item"><span class="sub-name">Winback</span></a>
+        </div>
+
+        <!-- 3. 青春激戰 -->
+        <div class="sub-category-pane" id="pane-youth">
+          <a href="#iv" class="sub-item"><span class="sub-name">營養點滴</span></a>
+          <a href="#maxwave" class="sub-item"><span class="sub-name">Maxwave極限震波</span></a>
+        </div>
+
+        <!-- 4. 電波、音波 -->
+        <div class="sub-category-pane" id="pane-energy">
+          <a href="#density" class="sub-item"><span class="sub-name">DENSITY 無雙電波</span></a>
+          <a href="#mpt" class="sub-item"><span class="sub-name">Ultraformer MPT海芙音波媚必提</span></a>
+          <a href="#ulthera" class="sub-item"><span class="sub-name">Ultherapy Prime美國音波 第二代</span></a>
+          <a href="#potenza" class="sub-item"><span class="sub-name">Potenza 無限電波</span></a>
+        </div>
+
+        <!-- 5. 皮膚雷射 -->
+        <div class="sub-category-pane" id="pane-laser">
+          <a href="#capri" class="sub-item"><span class="sub-name">Capri 藍雷射</span></a>
+          <a href="#discovery" class="sub-item"><span class="sub-name">Discovery Pico探索皮秒</span></a>
+        </div>
+
+        <!-- 6. 肉毒 -->
+        <div class="sub-category-pane" id="pane-botox">
+          <a href="#botox-brand" class="sub-item"><span class="sub-name">Botox 保妥適</span></a>
+          <a href="#xeomin" class="sub-item"><span class="sub-name">Xeomin 天使肉毒</span></a>
+          <a href="#nabota" class="sub-item"><span class="sub-name">優力柔(奇肌肉毒)</span></a>
+        </div>
+
+        <!-- 7. 膠原蛋白增生劑 -->
+        <div class="sub-category-pane" id="pane-colloids">
+          <a href="#aesthefill" class="sub-item"><span class="sub-name">AestheFill 艾麗斯</span></a>
+          <a href="#juvelook" class="sub-item"><span class="sub-name">Juvelook喬雅露</span></a>
+          <a href="#radiesse" class="sub-item"><span class="sub-name">Radiesse 再生針</span></a>
+          <a href="#sculptra" class="sub-item"><span class="sub-name">Sculptra 舒顏萃</span></a>
+        </div>
+
+        <!-- 8. 玻尿酸 -->
+        <div class="sub-category-pane" id="pane-ha">
+          <a href="#belotero" class="sub-item"><span class="sub-name">Belotero 保柔緹</span></a>
+          <a href="#teosane" class="sub-item"><span class="sub-name">Teoxane 緹奧希</span></a>
+          <a href="#juvederm" class="sub-item"><span class="sub-name">Juvederm喬雅登</span></a>
+          <a href="#dermafiller" class="sub-item"><span class="sub-name">Dermafiller 德瑪芙</span></a>
+        </div>
+
+        <!-- 9. 水光、黑眼圈、消脂 -->
+        <div class="sub-category-pane" id="pane-advanced">
+          <a href="#sunmax" class="sub-item"><span class="sub-name">Sunmax 熊貓針</span></a>
+          <a href="#ronkyla" class="sub-item"><span class="sub-name">Ronkyla 容脂針</span></a>
+          <a href="#belotero-soft" class="sub-item"><span class="sub-name">Belotero 素妍針</span></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
       <a href="#space">空間理念</a>
       <a href="#team">醫療團隊</a>
       <a href="#journal">專業文章</a>
@@ -631,7 +840,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>Copyright© 曜診所 Flos. All rights reserved.</span>
+      <span>Copyright© 2026 曜診所 Flos. All rights reserved.</span>
       <div class="socials">
         <a href="https://www.facebook.com/share/1FQMm58v2Y/?mibextid=wwXIfr" target="_blank">Facebook</a>
         <a href="https://www.instagram.com/flos.clinic.wx/" target="_blank">Instagram</a>
@@ -651,5 +860,29 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
+<!-- ⬇️ 把下拉選單的 JS 貼在這裡 ⬇️ -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const categoryItems = document.querySelectorAll(".category-item");
+    const subPanes = document.querySelectorAll(".sub-category-pane");
+
+    categoryItems.forEach(item => {
+      item.addEventListener("mouseenter", function() {
+        categoryItems.forEach(i => i.classList.remove("active"));
+        this.classList.add("active");
+
+        const targetID = this.getAttribute("data-target");
+
+        subPanes.forEach(pane => {
+          pane.classList.remove("active");
+          if(pane.id === "pane-" + targetID) {
+            pane.classList.add("active");
+          }
+        });
+      });
+    });
+  });
+</script>
+    
 </body>
 </html>
