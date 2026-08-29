@@ -315,11 +315,24 @@
   }
   .category-list { list-style: none; padding: 0; margin: 0; }
   .category-item {
-    font-size: 17px; color: #111; padding: 10px 14px; cursor: pointer;
-    transition: all 0.2s ease; margin-bottom: 4px; border-radius: 2px; letter-spacing: 0.5px;
+    font-size: 17px; color: #111; padding: 0; cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease; margin-bottom: 4px; border-radius: 2px; letter-spacing: 0.5px;
   }
   .category-item.active,
   .category-item:hover { background-color: #112220; color: #fff; }
+
+  /* 分類列的可點擊按鈕（桌機／手機共用外觀，僅手機賦予展開行為） */
+  .category-toggle {
+    all: unset;
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; box-sizing: border-box;
+    padding: 10px 14px; cursor: pointer;
+    font: inherit; color: inherit; letter-spacing: inherit;
+  }
+  .category-toggle:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+
+  .arrow-mobile{ display:none; }
+  .mobile-subpanel{ display:none; }
 
   .mega-content { width: 55%; display: flex; flex-direction: column; justify-content: flex-start; }
   .sub-category-pane { display: none; }
@@ -372,9 +385,36 @@
     }
     .nav-item.dropdown-mega.mega-open .mega-menu { display: block; }
 
-    .mega-menu-container { flex-direction: column; gap: 20px; }
-    .mega-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); padding-right: 0; padding-bottom: 15px; }
-    .mega-content { width: 100%; }
+    .mega-menu-container { flex-direction: column; gap: 8px; }
+    .mega-sidebar { width: 100%; border-right: none; border-bottom: none; padding-right: 0; padding-bottom: 0; }
+    .mega-content { display: none; } /* 手機版改用各分類自己底下的展開區塊，不用共用內容欄 */
+
+    .category-list { display: flex; flex-direction: column; gap: 2px; }
+    .category-item.active { background: none; color: #111; } /* 桌機用的預設 active 樣式，手機不套用 */
+    .category-item.mobile-open { background-color: #112220; color: #fff; }
+
+    .arrow-desktop{ display: none; }
+    .arrow-mobile{
+      display: inline-block; margin-left: 8px; flex-shrink: 0;
+      transition: transform .25s ease;
+    }
+    .category-item.mobile-open .arrow-mobile{ transform: rotate(180deg); }
+
+    .category-item.mobile-open > .mobile-subpanel {
+      display: flex; flex-direction: column; gap: 2px;
+      background: var(--paper-deep);
+      border-left: 3px solid var(--gold-deep);
+      padding: 6px 14px;
+      margin: 2px 0 6px;
+      border-radius: 0 0 4px 4px;
+    }
+    .mobile-subpanel .sub-item {
+      padding: 10px 4px;
+      font-size: 14.5px;
+      color: var(--ink);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .mobile-subpanel .sub-item:last-child{ border-bottom: none; }
   }
 </style>
 </head>
@@ -395,15 +435,122 @@
             <!-- 左側：大項目列表 -->
             <div class="mega-sidebar">
               <ul class="category-list">
-                <li class="category-item active" data-target="skin">肌膚管理 ➔</li>
-                <li class="category-item" data-target="body">勻體方案 ➔</li>
-                <li class="category-item" data-target="youth">青春激戰 ➔</li>
-                <li class="category-item" data-target="energy">電波、音波 ➔</li>
-                <li class="category-item" data-target="laser">皮膚雷射 ➔</li>
-                <li class="category-item" data-target="botox">肉毒 ➔</li>
-                <li class="category-item" data-target="colloids">膠原蛋白增生劑 ➔</li>
-                <li class="category-item" data-target="ha">玻尿酸 ➔</li>
-                <li class="category-item" data-target="advanced">水光、黑眼圈、消脂 ➔</li>
+                <li class="category-item active" data-target="skin">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">肌膚管理</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#dermapen" class="sub-item">Dermapen得美微針筆</a>
+                    <a href="#syndeo" class="sub-item">Syndeo海菲秀</a>
+                    <a href="#emfusion" class="sub-item">Emfusion</a>
+                    <a href="#jetpeel" class="sub-item">JetPeel潔比爾</a>
+                    <a href="#seyo" class="sub-item">SEYO水光儀</a>
+                    <a href="#smartlux" class="sub-item">SMARTLUX照光機</a>
+                    <a href="#curejet" class="sub-item">CUREJET酷捷</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="body">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">勻體方案</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#inmode" class="sub-item">InMode LIFT鑽石超塑</a>
+                    <a href="#embody" class="sub-item">EMBODY核心美力</a>
+                    <a href="#emsculpt" class="sub-item">Emsculpt NEO 熱磁減脂</a>
+                    <a href="#indiba" class="sub-item">INDIBA英特波</a>
+                    <a href="#onda" class="sub-item">Onda PRO超微波</a>
+                    <a href="#winback" class="sub-item">Winback</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="youth">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">青春激戰</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#iv" class="sub-item">營養點滴</a>
+                    <a href="#maxwave" class="sub-item">Maxwave極限震波</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="energy">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">電波、音波</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#density" class="sub-item">DENSITY 無雙電波</a>
+                    <a href="#mpt" class="sub-item">Ultraformer MPT海芙音波媚必提</a>
+                    <a href="#ulthera" class="sub-item">Ultherapy Prime美國音波 第二代</a>
+                    <a href="#potenza" class="sub-item">Potenza 無限電波</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="laser">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">皮膚雷射</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#capri" class="sub-item">Capri 藍雷射</a>
+                    <a href="#discovery" class="sub-item">Discovery Pico探索皮秒</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="botox">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">肉毒</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#botox-brand" class="sub-item">Botox 保妥適</a>
+                    <a href="#xeomin" class="sub-item">Xeomin 天使肉毒</a>
+                    <a href="#nabota" class="sub-item">優力柔(奇肌肉毒)</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="colloids">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">膠原蛋白增生劑</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#aesthefill" class="sub-item">AestheFill 艾麗斯</a>
+                    <a href="#juvelook" class="sub-item">Juvelook喬雅露</a>
+                    <a href="#radiesse" class="sub-item">Radiesse 再生針</a>
+                    <a href="#sculptra" class="sub-item">Sculptra 舒顏萃</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="ha">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">玻尿酸</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#belotero" class="sub-item">Belotero 保柔緹</a>
+                    <a href="#teosane" class="sub-item">Teoxane 緹奧希</a>
+                    <a href="#juvederm" class="sub-item">Juvederm喬雅登</a>
+                    <a href="#dermafiller" class="sub-item">Dermafiller 德瑪芙</a>
+                  </div>
+                </li>
+                <li class="category-item" data-target="advanced">
+                  <button type="button" class="category-toggle">
+                    <span class="category-label">水光、黑眼圈、消脂</span>
+                    <span class="arrow-desktop" aria-hidden="true">➔</span>
+                    <span class="arrow-mobile" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="mobile-subpanel">
+                    <a href="#sunmax" class="sub-item">Sunmax 熊貓針</a>
+                    <a href="#ronkyla" class="sub-item">Ronkyla 容脂針</a>
+                    <a href="#belotero-soft" class="sub-item">Belotero 素妍針</a>
+                  </div>
+                </li>
               </ul>
             </div>
 
@@ -816,12 +963,23 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // 2. 桌機版：療程分類切換（肌膚管理／勻體方案…）
+    const isMobile = () => window.matchMedia('(max-width: 880px)').matches;
+
+    // 2a. 桌機版：療程分類切換（肌膚管理／勻體方案…，維持原本 hover 行為不變）
     const categoryItems = document.querySelectorAll(".category-item");
     const subPanes = document.querySelectorAll(".sub-category-pane");
     categoryItems.forEach(item => {
-      item.addEventListener("mouseenter", function () { switchCategory(this); });
-      item.addEventListener("click", function (e) { e.preventDefault(); switchCategory(this); });
+      item.addEventListener("mouseenter", function () {
+        if (!isMobile()) switchCategory(this);
+      });
+      item.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (isMobile()) {
+          toggleMobileCategory(this);
+        } else {
+          switchCategory(this);
+        }
+      });
     });
     function switchCategory(currentItem) {
       categoryItems.forEach(i => i.classList.remove("active"));
@@ -832,13 +990,18 @@
       });
     }
 
-    // 3. 手機版漢堡選單：開關 + 療程項目手風琴 + 各種關閉時機
+    // 2b. 手機版：每個分類項目各自在原地展開／收合，同時間只留一個展開
+    function toggleMobileCategory(item) {
+      const wasOpen = item.classList.contains("mobile-open");
+      categoryItems.forEach(i => i.classList.remove("mobile-open"));
+      if (!wasOpen) item.classList.add("mobile-open");
+    }
+
+    // 3. 手機版漢堡選單：開關 + 各種關閉時機
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.getElementById('primaryNav');
     const dropdownMega = document.querySelector('.nav-item.dropdown-mega');
     const dropdownLink = dropdownMega ? dropdownMega.querySelector(':scope > .nav-link') : null;
-
-    const isMobile = () => window.matchMedia('(max-width: 880px)').matches;
 
     function openMenu() {
       navLinks.classList.add('active');
@@ -850,6 +1013,7 @@
       menuToggle.textContent = '☰';
       menuToggle.setAttribute('aria-expanded', 'false');
       if (dropdownMega) dropdownMega.classList.remove('mega-open');
+      categoryItems.forEach(i => i.classList.remove('mobile-open'));
     }
 
     if (menuToggle && navLinks) {
